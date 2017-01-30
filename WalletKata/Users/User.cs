@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace WalletKata.Users
 {
@@ -7,14 +6,21 @@ namespace WalletKata.Users
     {
         private List<User> friends = new List<User>();
 
-        public IEnumerable GetFriends()
+        public void AddFriend(User user)
         {
-            return friends;
+            friends.Add(user);
         }
 
-        public void AddFriend(User friend)
+        public bool IsFriendOf(User user)
         {
-            friends.Add(friend);
+            foreach (User friend in friends)
+            {
+                if (friend.Equals(user))
+                {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }
