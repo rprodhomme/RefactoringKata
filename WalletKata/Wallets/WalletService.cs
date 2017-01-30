@@ -17,18 +17,25 @@ namespace WalletKata.Wallets
 
         public List<Wallet> GetWalletsByUser(User user)
         {
-            User loggedUser = userSession.GetLoggedUser();
-            if (loggedUser == null)
-            {
-                throw new UserNotLoggedInException();
-            }
-
+            User loggedUser = RequireLoggedUser();
+    
             if (!user.IsFriendOf(loggedUser))
             {
                 return new List<Wallet>();
             }
 
             return walletDao.FindWalletsByUser(user);
+        }
+
+        private User RequireLoggedUser()
+        {
+            User loggedUser = userSession.GetLoggedUser();
+            if (loggedUser == null)
+            {
+                throw new UserNotLoggedInException();
+            }
+
+            return loggedUser;
         }
     }
 }
