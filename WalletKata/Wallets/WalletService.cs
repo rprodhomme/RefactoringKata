@@ -9,6 +9,12 @@ namespace WalletKata.Wallets
         private IUserSession userSession;
         private IWalletDAO walletDao;
 
+        public WalletService()
+        {
+            this.userSession = UserSession.GetInstance();
+            this.walletDao = new WalletDAO();
+        }
+
         public WalletService(IUserSession userSession, IWalletDAO walletDao)
         {
             this.userSession = userSession;
